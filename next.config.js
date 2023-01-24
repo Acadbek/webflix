@@ -2,12 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
     ignoreBuildErrors: true,
   },
+  remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "files.cinerama.uz",
+      port: "",
+      pathname: "/files.cinerama.uz/**",
+    },
+  ],
 };
 
 module.exports = nextConfig;

@@ -3,29 +3,34 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
+import axios from "axios";
+import Navbar from "@/components/navbar";
 
 type PostProps = {
   userId: number;
   id: number;
   title: string;
   body: string;
+  data: any;
+  movieList: any[];
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  const data: PostProps = await res.json();
-  console.log(data);
+  const data = await axios.get(
+    "https://api.cinerama.uz/api-test/movie-list?page=1&items=20"
+  );
 
+  console.log(data.data.data.movieList);
   return {
     props: {
-      ninja: data,
+      data: data.data.data.movieList,
     },
   };
 };
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ ninja }: any) {
+export default function Home({ data }: any) {
   return (
     <>
       <Head>
@@ -34,6 +39,9 @@ export default function Home({ ninja }: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header>
+        <Navbar />
+      </header>
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
@@ -46,10 +54,10 @@ export default function Home({ ninja }: any) {
         </div>
         <div>
           <div className="text-white flex flex-col">
-            {ninja?.map((item: { name: string; id: number }) => {
+            {data?.map((item: { title: string; id: number }) => {
               return (
-                <Link href={`${item.id}`} key={item.id}>
-                  {item.name}
+                <Link href={String(item.id)} key={item.id}>
+                  {item.title}
                 </Link>
               );
             })}

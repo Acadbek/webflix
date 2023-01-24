@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  --blur: 10px;
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -17,6 +18,36 @@
   --callout-border-rgb: 172, 175, 176;
 }
 
+@font-face {
+  font-family: "Webflix";
+  src: url("../public/fonts/BebasNeue.woff");
+}
+
 body {
   background-color: black;
+}
+
+.container {
+  max-width: 1336px;
+  margin: 0 auto;
+}
+
+.nav {
+  height: 50px !important;
+  top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(54, 52, 52);
+  border-radius: 40px;
+  padding: 0px 50px;
+  backdrop-filter: blur(3px);
+  opacity: 1;
+  z-index: 5;
+  background: rgba(49, 49, 49, 0.8);
+  /* background: #4e4e4ecc; */
+}
+
+.logo {
+  font-family: "Webflix";
 }
