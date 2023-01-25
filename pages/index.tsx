@@ -1,36 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import axios from "axios";
 import Navbar from "@/components/navbar";
+import Carousel from "@/components/carousel";
+import Sidebar from "@/components/sidebar";
 
-type PostProps = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-  data: any;
-  movieList: any[];
-};
-
-export const getStaticProps = async () => {
-  const data = await axios.get(
-    "https://api.cinerama.uz/api-test/movie-list?page=1&items=20"
-  );
-
-  console.log(data.data.data.movieList);
-  return {
-    props: {
-      data: data.data.data.movieList,
-    },
-  };
-};
-
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home({ data }: any) {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -42,28 +17,36 @@ export default function Home({ data }: any) {
       <header>
         <Navbar />
       </header>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <h1 className="text-3xl font-bold underline text-red-900">
-            Hello world!
-          </h1>
-        </div>
-        <div>
-          <div className="text-white flex flex-col">
-            {data?.map((item: { title: string; id: number }) => {
-              return (
-                <Link href={String(item.id)} key={item.id}>
-                  {item.title}
-                </Link>
-              );
-            })}
+      <main className="container pt-[4rem]">
+        <div className="flex gap-4">
+          <div>
+            <Sidebar />
+          </div>
+          <div>
+            <Carousel data={data.slice(0, 4)} />
+            <div className="text-white flex flex-col">
+              {data?.map((item: { title: string; id: number }) => {
+                return (
+                  <Link href={String(item.id)} key={item.id}>
+                    {item.title}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </main>
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const data = await axios(
+    "https://api.cinerama.uz/api-test/movie-list?page=1&items=20"
+  );
+  return {
+    props: {
+      data: data.data.data.movieList,
+    },
+  };
+};

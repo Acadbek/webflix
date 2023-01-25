@@ -18,7 +18,6 @@ export const getStaticPaths = async () => {
     };
   });
 
-  console.log(paths);
 
   return {
     paths,

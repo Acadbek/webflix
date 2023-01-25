@@ -1,0 +1,27 @@
+import useID from "@/hooks/useID";
+
+export const data = [
+  { id: 1, title: "All", link: "all" },
+  { id: 2, title: "Action", link: "action" },
+  { id: 3, title: "Adventure", link: "adventure" },
+  { id: 4, title: "Animation", link: "animation" },
+  { id: 5, title: "Comedy", link: "comedy" },
+  { id: 6, title: "Crime", link: "crime" },
+  { id: 7, title: "Documentary", link: "documentary" },
+  { id: 8, title: "Drama", link: "drama" },
+  { id: 9, title: "Family", link: "family" },
+  { id: 10, title: "Fantasy", link: "fantasy" },
+  { id: 11, title: "History", link: "history" },
+  { id: 12, title: "Drama", link: "drama" },
+  { id: 13, title: "Horror", link: "horror" },
+  { id: 14, title: "Drama", link: "drama" },
+  { id: 15, title: "Music", link: "music" },
+  { id: 16, title: "Drama", link: "drama" },
+  { id: 17, title: "Mystery", link: "mystery" },
+  { id: 18, title: "Romance", link: "romance" },
+  { id: 19, title: "Science Fiction", link: "science-fiction" },
+  { id: 20, title: "TV Movie", link: "tv-movie" },
+  { id: 21, title: "Thriller", link: "thriller" },
+  { id: 22, title: "War", link: "war" },
+  { id: 23, title: "Western", link: "western" },
+];

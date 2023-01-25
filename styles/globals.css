@@ -28,7 +28,7 @@ body {
 }
 
 .container {
-  max-width: 1336px;
+  max-width: 1320px;
   margin: 0 auto;
 }
 
@@ -50,4 +50,24 @@ body {
 
 .logo {
   font-family: "Webflix";
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2c2c2c;
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(85, 85, 85);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
