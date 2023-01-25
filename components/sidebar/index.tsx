@@ -2,9 +2,8 @@ import Link from "next/link";
 import React from "react";
 import Menu from "../link";
 import { data } from "@/utils/sidebar";
-type Props = {};
 
-function Sidebar({}: Props) {
+function Sidebar() {
   return (
     <div className="sticky top-[45px]">
       <div className="text-white w-52 h-full">

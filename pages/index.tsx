@@ -1,7 +1,7 @@
 import Head from "next/head";
 import axios from "axios";
 import Navbar from "@/components/navbar";
-import Carousel from "@/components/carousel/carousel";
+import Carousel from "@/components/carousel";
 import Sidebar from "@/components/sidebar";
 import Card from "@/components/card";
 
@@ -26,9 +26,16 @@ export default function Home({ data }: any) {
             <div className="flex flex-col gap-4">
               <Carousel items={data.slice(2, 7)} />
               <div className="text-white grid lg:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-4 md:grid-cols-4">
-                {data?.map((item): any => {
-                  return <Card key={item.id} data={item} />;
-                })}
+                {data.map((item: any) => (
+                  <Card
+                    poster=""
+                    title=""
+                    year={3}
+                    id={3}
+                    key={item.id}
+                    data={item}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -42,6 +49,8 @@ export const getStaticProps = async () => {
   const data = await axios(
     "https://api.cinerama.uz/api-test/movie-list?page=1&items=20"
   );
+  console.log(data.data);
+
   return {
     props: {
       data: data.data.data.movieList,

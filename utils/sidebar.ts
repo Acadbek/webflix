@@ -1,6 +1,8 @@
 import useID from "@/hooks/useID";
 
-export const data = [
+type dataType = { id: number; title: string; link: string }[];
+
+export const data: dataType = [
   { id: 1, title: "All", link: "all" },
   { id: 2, title: "Action", link: "action" },
   { id: 3, title: "Adventure", link: "adventure" },
