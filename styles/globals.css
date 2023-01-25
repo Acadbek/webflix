@@ -41,9 +41,9 @@ body {
   background-color: rgb(54, 52, 52);
   border-radius: 40px;
   padding: 0px 50px;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(0.1px);
   opacity: 1;
-  z-index: 5;
+  z-index: 9999;
   background: rgba(49, 49, 49, 0.8);
   /* background: #4e4e4ecc; */
 }
@@ -56,18 +56,16 @@ body {
   width: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: #2c2c2c;
   border-radius: 4px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgb(85, 85, 85);
+  border-radius: 40px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

@@ -1,7 +1,12 @@
 import Link from "next/link";
 import React from "react";
 
-const Menu = ({ link, title }) => {
+type LinkType = {
+  link: string;
+  title: string;
+};
+
+const Menu = ({ link, title }: LinkType) => {
   return (
     <li>
       <Link href={link}>{title}</Link>

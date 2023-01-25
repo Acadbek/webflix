@@ -1,7 +1,7 @@
 import useCarousel from "@/hooks/useCarousel";
 import { useSwipeable } from "react-swipeable";
 import Image from "next/image";
-// import cn from "classnames";
+import cn from "classnames";
 import Link from "next/link";
 // import { MediaSingleItemData } from "@/types/tmdb/parsed";
 
@@ -9,8 +9,8 @@ type Props = {
   // items: MediaSingleItemData[];
 };
 
-const Carousel = ({ items }) => {
-  console.log(items);
+const Carousel = ({ items }: any) => {
+  console.log(items.genres, "data");
 
   const {
     index,
@@ -33,49 +33,39 @@ const Carousel = ({ items }) => {
     <div
       onMouseEnter={() => resetCarouselTimeout()}
       onMouseLeave={() => setCarouselTimeout()}
-      className="mx-auto container w-[1100px] overflow-hidden"
+      className="mx-auto container overflow-hidden rounded-lg"
     >
-      <div className="relative">
+      <div className="relative w-full">
         <div
           {...handlers}
           className="transation whitespace-nowrap duration-1000 ease-in-out"
           style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
         >
-          {items.map((data) => {
+          {items.map((data: any) => {
             return (
               <div key={data.id} className="inline-block w-full">
                 <figure className="relative overflow-visible whitespace-normal">
-                  <div className="relative h-64 w-full bg-gradient-to-t from-black md:h-96">
+                  <div className="relative h-[350px] w-full bg-gradient-to-t from-black">
                     {data.poster ? (
                       <Image
                         alt={data.title}
                         fill={true}
-                        className="pointer-events-none w-full rounded-lg object-cover opacity-50 shadow-2xl blur-[1px]"
+                        className="pointer-events-none w-full h-[350px] rounded-lg object-cover bg-top opacity-50 shadow-2xl blur-[1px]"
                         src={data.poster}
                       />
                     ) : null}
                   </div>
                   <figcaption className="pointer absolute bottom-0 flex h-full w-full flex-col justify-center bg-gradient-to-tr from-black/50 px-10 md:px-24">
-                    <div href={"/"}>
-                      <a>
-                        <span className="text-2xl md:text-5xl">
+                    <div>
+                      <div>
+                        <span className="text-2xl md:text-5xl text-white">
                           {data.title_en}
                         </span>
                         <p className="w-full pt-1.5 text-[15px] text-white/70 line-clamp-3 md:w-3/5 md:pt-4 md:text-base">
                           {data.year}
                         </p>
-                      </a>
-                    </div>
-                    {/* <div className="mt-4 md:mt-8">
-                      <div>
-                        <a
-                          aria-label={`Watch trailer for ${data.title}`}
-                          className="rounded-lg bg-moviyellow px-2.5 py-1.5 font-semibold text-movidark shadow-2xl md:px-4 md:py-2.5 md:text-lg"
-                        >
-                          Watch Trailer
-                        </a>
                       </div>
-                    </div> */}
+                    </div>
                   </figcaption>
                 </figure>
               </div>
@@ -83,18 +73,18 @@ const Carousel = ({ items }) => {
           })}
         </div>
 
-        <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 space-x-3">
+        <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 space-x-3 z-[999]">
           {items.map(({ id }, idx) => (
             <button
               key={id}
               onClick={() => setIndex(idx)}
-              // className={cn(
-              //   "h-1.5 rounded-3xl bg-white md:h-2",
-              //   { "w-3 bg-opacity-50 md:w-4": index !== idx },
-              //   {
-              //     "w-6 md:w-8": index === idx,
-              //   }
-              // )}
+              className={cn(
+                "h-1.5 rounded-3xl bg-white md:h-2",
+                { "w-3 bg-opacity-50 md:w-4": index !== idx },
+                {
+                  "w-6 md:w-8": index === idx,
+                }
+              )}
               aria-current={index === idx}
               aria-label={`Go to slide ${idx} of ${items.length}`}
             ></button>
