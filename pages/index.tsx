@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import axios from "axios";
 import Navbar from "@/components/navbar";
-import Carousel from "@/components/carousel";
+import Carousel from "@/components/carousel/carousel";
 import Sidebar from "@/components/sidebar";
 
 export default function Home({ data }) {
@@ -23,7 +23,7 @@ export default function Home({ data }) {
             <Sidebar />
           </div>
           <div>
-            <Carousel data={data.slice(0, 4)} />
+            <Carousel items={data.slice(12, 17)} />
             <div className="text-white flex flex-col">
               {data?.map((item: { title: string; id: number }) => {
                 return (

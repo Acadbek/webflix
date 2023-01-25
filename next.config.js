@@ -4,14 +4,15 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  remotePatterns: [
-    {
-      protocol: "https",
-      hostname: "files.cinerama.uz",
-      port: "",
-      pathname: "/files.cinerama.uz/**",
-    },
-  ],
+  images: {
+    domains: ["files.cinerama.uz", "www.picsum.photos.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
