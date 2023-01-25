@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import axios from "axios";
 import Navbar from "@/components/navbar";
 import Carousel from "@/components/carousel/carousel";
@@ -20,13 +19,13 @@ export default function Home({ data }: any) {
       </header>
       <main className="container pt-[70px]">
         <div className="flex gap-4">
-          <div>
+          <div className="hidden md:block lg:block">
             <Sidebar />
           </div>
           <div className="w-full">
             <div className="flex flex-col gap-4">
               <Carousel items={data.slice(2, 7)} />
-              <div className="text-white grid grid-cols-5 gap-4">
+              <div className="text-white grid lg:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-4 md:grid-cols-4">
                 {data?.map((item): any => {
                   return <Card key={item.id} data={item} />;
                 })}
