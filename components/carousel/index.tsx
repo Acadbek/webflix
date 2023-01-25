@@ -1,5 +1,4 @@
 import useCarousel from "@/hooks/useCarousel";
-import { useSwipeable } from "react-swipeable";
 import Image from "next/image";
 import cn from "classnames";
 
@@ -13,14 +12,6 @@ const Carousel = ({ items }: any) => {
     setCarouselTimeout,
   } = useCarousel(items.length);
 
-  const handlers = useSwipeable({
-    onSwipedLeft: next,
-    onSwipedRight: back,
-    swipeDuration: 500,
-    preventScrollOnSwipe: true,
-    trackMouse: true,
-  });
-
   return (
     <div
       onMouseEnter={() => resetCarouselTimeout()}
@@ -29,7 +20,7 @@ const Carousel = ({ items }: any) => {
     >
       <div className="relative w-full">
         <div
-          {...handlers}
+          // {...handlers}
           className="transation whitespace-nowrap duration-1000 ease-in-out"
           style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
         >
