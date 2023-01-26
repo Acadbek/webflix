@@ -96,7 +96,7 @@ const Details = ({ data }: any) => {
         <h2 className="text-lg font-bold mt-4 text-white pl-[50px]">
           Cast of {data.title_en}
         </h2>
-        <div className="flex mt-[100px] gap-4 text-white px-[50px]">
+        <div className="flex mb-4 mt-[100px] gap-4 text-white px-[50px]">
           <Swiper
             slidesPerView={7}
             spaceBetween={30}
@@ -107,15 +107,15 @@ const Details = ({ data }: any) => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {data?.people[0].employees?.map((item) => (
+            {data?.people[0]?.employees?.map((item) => (
               <SwiperSlide key={item.id}>
-                <div className="flex flex-col items-center ">
+                <div className="flex flex-col items-center">
                   <Image
                     className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
                     src={item.photo}
                     width={150}
                     height={150}
-                    alt=""
+                    alt="asdas"
                   />
                   <p className="truncate text-xs font-bold md:text-sm mt-2">
                     {item.full_name}

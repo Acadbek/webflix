@@ -9,7 +9,7 @@ const Navbar = ({}: any) => {
   return (
     <div>
       <nav className="p-4 nav fixed top-0 w-full bg-slate-600">
-        <span className="loader"></span>
+        {/* <span className="loader"></span> */}
         <div className="container flex text-white items-center justify-between">
           <div className="flex items-center gap-10">
             <Link
