@@ -1,13 +1,17 @@
 import axios from "axios";
 import Image from "next/image";
-import { globalCurrentPage } from "@/pages";
+import { globalCurrentPage } from "./index";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+
+import { Navigation } from "swiper";
 
 export const getStaticPaths = async () => {
   const data = await axios.get(
-    `${process.env.API_URL}?page=${globalCurrentPage}&items=${268}`
+    `${process.env.API_URL}?page=${globalCurrentPage}&items=${266}`
   );
-
-  console.log(globalCurrentPage, "asdssssssss");
 
   const datas = data.data.data;
 
@@ -18,6 +22,7 @@ export const getStaticPaths = async () => {
       },
     };
   });
+
   return {
     paths,
     fallback: false,
@@ -34,18 +39,93 @@ export const getStaticProps = async (context: any) => {
   };
 };
 
+function secondsToHms(d) {
+  d = Number(d);
+  var h = Math.floor(d / 3600);
+  var m = Math.floor((d % 3600) / 60);
+  var s = Math.floor((d % 3600) % 60);
+
+  var hDisplay = h > 0 ? h + (h == 1 ? "h " : "h ") : "";
+  var mDisplay = m > 0 ? m + (m == 1 ? "m " : "m ") : "";
+  return hDisplay + mDisplay;
+}
+
 const Details = ({ data }: any) => {
+  const myStyle = {
+    backgroundImage: `linear-gradient(to right, rgb(32, 32, 32) 150px, rgba(60, 50, 20, 0.64) 70%), url(${data.files[0].poster})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    paddingTop: "80px",
+    opacity: "0.5",
+  };
   return (
-    <div className="text-red-400">
-      <h1>{data.title_en}</h1>
-      <p>{data.title}</p>
-      <Image
-        src={data?.poster}
-        alt={data.title_en}
-        width={100}
-        height={100}
-        priority
-      />
+    <div
+      style={myStyle}
+      className="absolute -top-4 -z-50 w-full bg-cover bg-left bg-no-repeat"
+    >
+      <div className="container">
+        <div className="text-white !z-50 flex gap-10 items-start px-[50px] pt-[70px]">
+          <div className="">
+            <Image
+              className="rounded-[8px]"
+              src={data?.poster}
+              alt={data.title_en}
+              width={350}
+              height={500}
+            />
+          </div>
+          <div className="w-10/12">
+            <h1 className="text-xl font-bold md:text-3xl">{data?.title_en}</h1>
+            <p className="flex items-center gap-x-1 my-4">
+              {data.year} - {secondsToHms(data.files[0].fileDuration)}
+            </p>
+            <div className="flex items-center gap-4">
+              {data?.genres.map((genre) => (
+                <div
+                  className="rounded-3xl border-2 border-yellow-500 px-3 py-1 text-xs font-semibold transition "
+                  key={genre?.id}
+                >
+                  {genre?.title}
+                </div>
+              ))}
+              <div>Rating: {data?.kp_rating}</div>
+            </div>
+            <p className="mt-4">{data.description}</p>
+          </div>
+        </div>
+        <h2 className="text-lg font-bold mt-4 text-white pl-[50px]">
+          Cast of {data.title_en}
+        </h2>
+        <div className="flex mt-[100px] gap-4 text-white px-[50px]">
+          <Swiper
+            slidesPerView={7}
+            spaceBetween={30}
+            slidesPerGroup={1}
+            loop={true}
+            loopFillGroupWithBlank={true}
+            navigation={true}
+            modules={[Navigation]}
+            className="mySwiper"
+          >
+            {data?.people[0].employees?.map((item) => (
+              <SwiperSlide key={item.id}>
+                <div className="flex flex-col items-center ">
+                  <Image
+                    className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
+                    src={item.photo}
+                    width={150}
+                    height={150}
+                    alt=""
+                  />
+                  <p className="truncate text-xs font-bold md:text-sm mt-2">
+                    {item.full_name}
+                  </p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
     </div>
   );
 };
