@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/link/index.tsxx", "hooks/useID.js", "hooks/useID.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/link/index.tsxx", "hooks/useID.js", "hooks/useID.js", "store/movies"],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,3 @@
-import useID from "@/hooks/useID";
-
 type dataType = { id: number; title: string; link: string }[];
 
 export const data: dataType = [

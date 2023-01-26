@@ -69,3 +69,47 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.loader {
+  width: 97%;
+  height: 4px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  overflow: hidden;
+  border-end-end-radius: 40px;
+  border-end-start-radius: 40px;
+}
+.loader::after {
+  content: "";
+  width: 0%;
+  height: 4.8px;
+  background-color: rgb(165, 165, 165);
+  background-image: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.25) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.25) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 15px 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  animation: a 6s ease-in infinite;
+}
+
+@keyframes a {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}

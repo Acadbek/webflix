@@ -1,10 +1,13 @@
 import axios from "axios";
 import Image from "next/image";
+import { globalCurrentPage } from "@/pages";
 
 export const getStaticPaths = async () => {
   const data = await axios.get(
-    "https://api.cinerama.uz/api-test/movie-list?page=1&items=20"
+    `${process.env.API_URL}?page=${globalCurrentPage}&items=${268}`
   );
+
+  console.log(globalCurrentPage, "asdssssssss");
 
   const datas = data.data.data;
 
@@ -15,7 +18,6 @@ export const getStaticPaths = async () => {
       },
     };
   });
-
   return {
     paths,
     fallback: false,
@@ -24,11 +26,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: any) => {
   const id: number = context.params.id;
-  const data = axios.get(
-    `https://api.cinerama.uz/api-test/movie-detail?id=${id}`
-  );
-  console.log(data);
-
+  const data = axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
   return {
     props: {
       data: (await data)?.data?.data,
