@@ -47,7 +47,7 @@ export default function Home({ data, length }: any) {
                   />
                 ))}
               </div>
-              <div className="flex flex-wrap gap-4 text-white">
+              <div className="flex flex-wrap gap-4 text-white mx-auto">
                 <Pagination
                   items={length} // 100
                   currentPage={currentPage} // 1

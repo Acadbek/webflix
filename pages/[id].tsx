@@ -1,12 +1,15 @@
 import axios from "axios";
 import Image from "next/image";
-import { globalCurrentPage } from "./index";
+import play from "@/public/icons/play.svg";
+import { globalCurrentPage } from "@/pages";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation } from "swiper";
+import Player from "@/components/player";
+import { useState } from "react";
 
 export const getStaticPaths = async () => {
   const data = await axios.get(
@@ -51,15 +54,25 @@ function secondsToHms(d) {
 }
 
 const Details = ({ data }: any) => {
+  const [openVideoPlayer, setOpenVideoPlayer] = useState(false);
   const myStyle = {
     backgroundImage: `linear-gradient(to right, rgb(32, 32, 32) 150px, rgba(60, 50, 20, 0.64) 70%), url(${data.files[0].poster})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     paddingTop: "80px",
-    opacity: "0.5",
+    opacity: "5",
+  };
+  const open = (e) => {
+    setOpenVideoPlayer(true);
+    e.stopPropagation();
+  };
+  const close = (e) => {
+    setOpenVideoPlayer(false);
+    e.stopPropagation();
   };
   return (
     <div
+      onClick={close}
       style={myStyle}
       className="absolute -top-4 -z-50 w-full bg-cover bg-left bg-no-repeat"
     >
@@ -89,8 +102,24 @@ const Details = ({ data }: any) => {
                 </div>
               ))}
               <div>Rating: {data?.kp_rating}</div>
+              <button
+                onClick={open}
+                className="inline-flex items-center justify-center rounded-full p-2 ring-1 ring-white/70 transition hover:ring-2 hover:ring-yellow-400"
+              >
+                <Image src={play} alt="play icon" />
+              </button>
             </div>
             <p className="mt-4">{data.description}</p>
+
+            <p className="mt-4 font-bold">
+              Country:
+              {data.countries.map((country) => (
+                <span key={country} className="text-white/70 ml-2">
+                  {country.title}
+                </span>
+              ))}
+            </p>
+            {openVideoPlayer && <Player />}
           </div>
         </div>
         <h2 className="text-lg font-bold mt-4 text-white pl-[50px]">

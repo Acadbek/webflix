@@ -5,7 +5,7 @@ function Pagination({ totalItems = 263, currentPage, pageSize, onPageChange }) {
     pages.push(i);
   }
   return (
-    <nav aria-label="Page navigation example">
+    <div>
       <ul className="inline-flex items-center -space-x-px">
         <li
           className={`${
@@ -13,7 +13,7 @@ function Pagination({ totalItems = 263, currentPage, pageSize, onPageChange }) {
           }`}
           onClick={() => onPageChange(currentPage - 1)}
         >
-          <div className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <div className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-black border border-gray-300 rounded-l-lg hover:bg-black hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
             <span className="sr-only">Previous</span>
             <svg
               aria-hidden="true"
@@ -35,8 +35,8 @@ function Pagination({ totalItems = 263, currentPage, pageSize, onPageChange }) {
             <div
               className={`${
                 currentPage === item
-                  ? "bg-gray-500 px-3 py-2 leading-tight text-gray-200 cursor-pointer"
-                  : "bg-white text-gray-700 px-3 py-2 leading-tight cursor-pointer"
+                  ? "bg-gray-500 border border-gray-300 px-3 py-2 leading-tight text-gray-200 cursor-pointer"
+                  : "bg-black border border-gray-300 text-gray-700 px-3 py-2 leading-tight cursor-pointer"
               }`}
             >
               {item}
@@ -50,7 +50,7 @@ function Pagination({ totalItems = 263, currentPage, pageSize, onPageChange }) {
           }`}
           onClick={() => onPageChange(currentPage + 1)}
         >
-          <div className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <div className="block px-3 py-2 leading-tight text-gray-500 bg-black border border-gray-300 rounded-r-lg hover:bg-black hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
             <span className="sr-only">Next</span>
             <svg
               aria-hidden="true"
@@ -68,7 +68,7 @@ function Pagination({ totalItems = 263, currentPage, pageSize, onPageChange }) {
           </div>
         </li>
       </ul>
-    </nav>
+    </div>
   );
 }
 

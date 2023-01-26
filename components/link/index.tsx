@@ -7,8 +7,9 @@ type LinkType = {
 };
 
 const Menu = ({ link, title }: LinkType) => {
+  let style = {};
   return (
-    <li>
+    <li className="p-1 tracking-wider">
       <Link href={link}>{title}</Link>
     </li>
   );
