@@ -1,7 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
 import play from "@/public/icons/play.svg";
-import { globalCurrentPage } from "@/pages";
+import globalCurrentPage from "@/pages";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
