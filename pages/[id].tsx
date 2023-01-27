@@ -11,7 +11,7 @@ import Player from "@/components/player";
 import { useState } from "react";
 
 export const getStaticPaths = async () => {
-  const data = await axios.get(`${process.env.API_URL}?page=${1}&items=${266}`);
+  const data = await axios.get(`${process.env.API_URL}?page=$1&items=266`);
 
   const datas = data.data.data;
 

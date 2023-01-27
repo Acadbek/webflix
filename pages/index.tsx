@@ -70,6 +70,6 @@ export const getStaticProps = async () => {
   const data = await res.json();
 
   return {
-    props: { data: data.data.movieList, length: data.data.total },
+    props: { data: data?.data?.movieList },
   };
 };
