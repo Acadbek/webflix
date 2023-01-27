@@ -1,7 +1,6 @@
 import axios from "axios";
 import Image from "next/image";
 import play from "@/public/icons/play.svg";
-import { globalCurrentPage } from "@/pages";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -12,9 +11,7 @@ import Player from "@/components/player";
 import { useState } from "react";
 
 export const getStaticPaths = async () => {
-  const data = await axios.get(
-    `${process.env.API_URL}?page=${globalCurrentPage}&items=${266}`
-  );
+  const data = await axios.get(`${process.env.API_URL}?page=${1}&items=${266}`);
 
   const datas = data.data.data;
 
