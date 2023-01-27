@@ -31,15 +31,10 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: any) => {
   let id: number = context.params.id;
-  // console.log(id.slice(-1, 3));
-  // console.log("ishladi");
-  // let nimadir = id.split("-");
-  // console.log(nimadir,'nmadir')
-
-  const data = axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
+  const data = await axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
   return {
     props: {
-      data: (await data)?.data?.data,
+      data: data?.data?.data,
     },
   };
 };
@@ -58,7 +53,7 @@ function secondsToHms(d) {
 const Details = ({ data }: any) => {
   const [openVideoPlayer, setOpenVideoPlayer] = useState(false);
   const myStyle = {
-    backgroundImage: `linear-gradient(to right, rgb(32, 32, 32) 150px, rgba(60, 50, 20, 0.64) 70%), url(${data.files[0].poster})`,
+    backgroundImage: `linear-gradient(to right, rgb(32, 32, 32) 150px, rgba(60, 50, 20, 0.64) 70%), url(${data?.files[0]?.poster})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     paddingTop: "80px",
@@ -84,7 +79,7 @@ const Details = ({ data }: any) => {
             <Image
               className="rounded-[8px]"
               src={data?.poster}
-              alt={data.title_en}
+              alt={data?.title_en}
               width={350}
               height={500}
             />
@@ -92,7 +87,7 @@ const Details = ({ data }: any) => {
           <div className="w-10/12">
             <h1 className="text-xl font-bold md:text-3xl">{data?.title_en}</h1>
             <p className="flex items-center gap-x-1 my-4">
-              {data.year} - {secondsToHms(data.files[0].fileDuration)}
+              {data?.year} - {secondsToHms(data?.files[0]?.fileDuration)}
             </p>
             <div className="flex items-center gap-4">
               {data?.genres.map((genre) => (
@@ -111,11 +106,11 @@ const Details = ({ data }: any) => {
                 <Image src={play} alt="play icon" />
               </button>
             </div>
-            <p className="mt-4">{data.description}</p>
+            <p className="mt-4">{data?.description}</p>
 
             <p className="mt-4 font-bold">
               Country:
-              {data.countries.map((country) => (
+              {data?.countries.map((country) => (
                 <span key={country} className="text-white/70 ml-2">
                   {country.title}
                 </span>
@@ -125,7 +120,7 @@ const Details = ({ data }: any) => {
           </div>
         </div>
         <h2 className="text-lg font-bold mt-4 text-white pl-[50px]">
-          Cast of {data.title_en}
+          Cast of {data?.title_en}
         </h2>
         <div className="flex mb-4 mt-[100px] gap-4 text-white px-[50px]">
           <Swiper
