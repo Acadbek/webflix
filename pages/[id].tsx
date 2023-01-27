@@ -12,8 +12,7 @@ import { useState } from "react";
 
 export const getStaticPaths = async () => {
   const data = await axios.get(`${process.env.API_URL}?page=$1&items=266`);
-
-  const datas = data.data.data;
+  const datas = await data.data.data;
 
   const paths = datas?.movieList.map((item: any) => {
     return {
@@ -112,7 +111,7 @@ const Details = ({ data }: any) => {
               Country:
               {data?.countries.map((country) => (
                 <span key={country} className="text-white/70 ml-2">
-                  {country.title}
+                  {country?.title}
                 </span>
               ))}
             </p>
@@ -134,17 +133,17 @@ const Details = ({ data }: any) => {
             className="mySwiper"
           >
             {data?.people[0]?.employees?.map((item) => (
-              <SwiperSlide key={item.id}>
+              <SwiperSlide key={item?.id}>
                 <div className="flex flex-col items-center">
                   <Image
                     className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
-                    src={item.photo}
+                    src={item?.photo}
                     width={150}
                     height={150}
                     alt="asdas"
                   />
                   <p className="truncate text-xs font-bold md:text-sm mt-2">
-                    {item.full_name}
+                    {item?.full_name}
                   </p>
                 </div>
               </SwiperSlide>
