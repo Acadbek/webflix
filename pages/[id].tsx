@@ -141,23 +141,22 @@ const Details = ({ data }: any) => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {data?.people[0]?.length >= 1 &&
-              data?.people[0]?.employees?.map((item) => (
-                <SwiperSlide key={item.id}>
-                  <div className="flex flex-col items-center">
-                    <Image
-                      className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
-                      src={item.photo}
-                      width={150}
-                      height={150}
-                      alt="asdas"
-                    />
-                    <p className="truncate text-xs font-bold md:text-sm mt-2">
-                      {item.full_name}
-                    </p>
-                  </div>
-                </SwiperSlide>
-              ))}
+            {data?.people[0]?.employees?.map((item) => (
+              <SwiperSlide key={item.id}>
+                <div className="flex flex-col items-center">
+                  <Image
+                    className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
+                    src={item.photo}
+                    width={150}
+                    height={150}
+                    alt="asdas"
+                  />
+                  <p className="truncate text-xs font-bold md:text-sm mt-2">
+                    {item.full_name}
+                  </p>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
