@@ -163,7 +163,7 @@ const Details = ({ data }: any) => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {data?.people[0] &&
+            {data?.people?.[0] &&
               data?.people[0]?.employees?.map((item) => (
                 <SwiperSlide key={item?.id}>
                   <div className="flex flex-col items-center">
