@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
       };
     });
 
-    console.log(data.data.data)
+    console.log('logcha', data.data.data)
     return {
       paths,
       fallback: false,
