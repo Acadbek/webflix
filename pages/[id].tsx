@@ -33,7 +33,12 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  const id: number = context.params.id;
+  let id: number = context.params.id;
+  // console.log(id.slice(-1, 3));
+  // console.log("ishladi");
+  // let nimadir = id.split("-");
+  // console.log(nimadir,'nmadir')
+
   const data = axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
   return {
     props: {

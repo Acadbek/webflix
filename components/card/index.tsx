@@ -12,8 +12,6 @@ type Props = {
 };
 
 const Card = ({ data }: Props) => {
-  // console.log(data, "data");
-
   return (
     <Link href={String(data.id)}>
       <div className="relative cursor-pointer overflow-hidden rounded-lg shadow-xl hover:brightness-125">
