@@ -11,31 +11,39 @@ import Player from "@/components/player";
 import { useState } from "react";
 
 export const getStaticPaths = async () => {
-  const data = await axios.get(`${process.env.API_URL}?page=$1&items=266`);
-  const datas = await data.data.data;
+  try {
+    const data = await axios.get(`${process.env.API_URL}?page=$1&items=266`);
+    const datas = await data?.data?.data;
 
-  const paths = datas?.movieList.map((item: any) => {
+    const paths = datas?.movieList.map((item: any) => {
+      return {
+        params: {
+          id: String(item.id),
+        },
+      };
+    });
+
     return {
-      params: {
-        id: String(item.id),
-      },
+      paths,
+      fallback: false,
     };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getStaticProps = async (context: any) => {
-  let id: number = context.params.id;
-  const data = await axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
-  return {
-    props: {
-      data: data?.data?.data,
-    },
-  };
+  try {
+    let id: number = context.params.id;
+    const data = await axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
+    return {
+      props: {
+        data: data?.data?.data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 function secondsToHms(d) {

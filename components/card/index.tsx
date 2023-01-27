@@ -13,7 +13,7 @@ type Props = {
 
 const Card = ({ data }: Props) => {
   return (
-    <Link href={String(data.id)}>
+    <Link href={`slug/${String(data.id)}`}>
       <div className="relative cursor-pointer overflow-hidden rounded-lg shadow-xl hover:brightness-125">
         <Image
           src={data.poster}
