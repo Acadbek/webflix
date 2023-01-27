@@ -116,7 +116,7 @@ const Details = ({ data }: any) => {
               Country:
               {data?.countries &&
                 data?.countries.map((country) => (
-                  <span key={country} className="text-white/70 ml-2">
+                  <span key={country.id} className="text-white/70 ml-2">
                     {country?.title}
                   </span>
                 ))}
