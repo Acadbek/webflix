@@ -9,43 +9,34 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import Player from "@/components/player";
 import { useState } from "react";
+import { fetchApi } from "@/helpers/fetchApi";
 
 export const getStaticPaths = async () => {
   let data;
-  try {
-    data = await axios.get(`${process?.env?.API_URL}?page=$1&items=266`);
-    const paths = data?.data?.data?.movieList.map((item: any) => {
-      return {
-        params: {
-          id: String(item.id),
-        },
-      };
-    });
-
+  data = await fetchApi(`${process?.env?.API_URL}?page=$1&items=266`);
+  const paths = data?.data?.movieList.map((item: any) => {
     return {
-      paths,
-      fallback: false,
-    };
-  } catch (error) {
-    console.log(error);
-    data = [];
-  }
-};
-
-export const getStaticProps = async (context: any) => {
-  let data;
-  try {
-    let id: number = context.params.id;
-    data = await axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
-    return {
-      props: {
-        data: data?.data?.data,
+      params: {
+        id: String(item.id),
       },
     };
-  } catch (error) {
-    console.log(error);
-    data = [];
-  }
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async (context) => {
+  let id: number = context.params.id;
+  const data = await fetchApi(`${process.env.API_URL_SLUG}?id=${id}`);
+
+  return {
+    props: {
+      data: data?.data,
+    },
+  };
 };
 
 function secondsToHms(d) {
@@ -98,17 +89,19 @@ const Details = ({ data }: any) => {
           <div className="w-10/12">
             <h1 className="text-xl font-bold md:text-3xl">{data?.title_en}</h1>
             <p className="flex items-center gap-x-1 my-4">
-              {data?.year} - {secondsToHms(data?.files[0]?.fileDuration)}
+              {data?.year} -{" "}
+              {secondsToHms(data?.files[0] && data?.files[0]?.fileDuration)}
             </p>
             <div className="flex items-center gap-4">
-              {data?.genres.map((genre) => (
-                <div
-                  className="rounded-3xl border-2 border-yellow-500 px-3 py-1 text-xs font-semibold transition "
-                  key={genre?.id}
-                >
-                  {genre?.title}
-                </div>
-              ))}
+              {data?.genres &&
+                data?.genres.map((genre) => (
+                  <div
+                    key={genre?.id}
+                    className="rounded-3xl border-2 border-yellow-500 px-3 py-1 text-xs font-semibold transition "
+                  >
+                    {genre?.title}
+                  </div>
+                ))}
               <div>Rating: {data?.kp_rating}</div>
               <button
                 onClick={open}
@@ -121,11 +114,12 @@ const Details = ({ data }: any) => {
 
             <p className="mt-4 font-bold">
               Country:
-              {data?.countries.map((country) => (
-                <span key={country} className="text-white/70 ml-2">
-                  {country?.title}
-                </span>
-              ))}
+              {data?.countries &&
+                data?.countries.map((country) => (
+                  <span key={country} className="text-white/70 ml-2">
+                    {country?.title}
+                  </span>
+                ))}
             </p>
             {openVideoPlayer && <Player />}
           </div>

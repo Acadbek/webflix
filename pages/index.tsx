@@ -4,6 +4,7 @@ import Card from "@/components/card";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 import Carousel from "@/components/carousel";
+import { fetchApi } from "@/helpers/fetchApi";
 import { paginate } from "@/helpers/paginate";
 import Pagination from "@/components/pagination";
 
@@ -65,15 +66,12 @@ export default function Home({ data, length }: any) {
 
 export const getStaticProps = async () => {
   let data;
-  try {
-    const res = await fetch(`${process.env.API_URL}?page=1&items=263`);
-    data = await res.json();
+  data = await fetchApi(`${process.env.API_URL}?page=1&items=263`);
 
-    return {
-      props: { data: data?.data?.movieList },
-    };
-  } catch (error) {
-    console.log(error);
-    data = [];
-  }
+  return {
+    props: {
+      data: data?.data?.movieList,
+      fallback: false,
+    },
+  };
 };
