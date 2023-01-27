@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import Player from "@/components/player";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export const getStaticPaths = async () => {
   let data;
@@ -70,6 +71,10 @@ const Details = ({ data }: any) => {
     paddingTop: "80px",
     opacity: "5",
   };
+  
+    const router = useRouter()
+ 
+  
   const open = (e) => {
     setOpenVideoPlayer(true);
     e.stopPropagation();
@@ -78,6 +83,10 @@ const Details = ({ data }: any) => {
     setOpenVideoPlayer(false);
     e.stopPropagation();
   };
+  
+    if (router.isFallback) {
+    return <div>Loading...</div>
+  }
   return (
     <div
       onClick={close}
