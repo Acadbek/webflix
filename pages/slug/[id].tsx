@@ -11,11 +11,10 @@ import Player from "@/components/player";
 import { useState } from "react";
 
 export const getStaticPaths = async () => {
+  let data;
   try {
-    const data = await axios.get(`${process.env.API_URL}?page=$1&items=266`);
-    const datas = await data?.data?.data;
-
-    const paths = datas?.movieList.map((item: any) => {
+    data = await axios.get(`${process?.env?.API_URL}?page=$1&items=266`);
+    const paths = data?.data?.data?.movieList.map((item: any) => {
       return {
         params: {
           id: String(item.id),
@@ -29,13 +28,15 @@ export const getStaticPaths = async () => {
     };
   } catch (error) {
     console.log(error);
+    data = [];
   }
 };
 
 export const getStaticProps = async (context: any) => {
+  let data;
   try {
     let id: number = context.params.id;
-    const data = await axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
+    data = await axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
     return {
       props: {
         data: data?.data?.data,
@@ -43,6 +44,7 @@ export const getStaticProps = async (context: any) => {
     };
   } catch (error) {
     console.log(error);
+    data = [];
   }
 };
 
@@ -60,7 +62,9 @@ function secondsToHms(d) {
 const Details = ({ data }: any) => {
   const [openVideoPlayer, setOpenVideoPlayer] = useState(false);
   const myStyle = {
-    backgroundImage: `linear-gradient(to right, rgb(32, 32, 32) 150px, rgba(60, 50, 20, 0.64) 70%), url(${data?.files[0]?.poster})`,
+    backgroundImage: `linear-gradient(to right, rgb(32, 32, 32) 150px, rgba(60, 50, 20, 0.64) 70%), url(${
+      data?.files[0] && data?.files[0]?.poster
+    })`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     paddingTop: "80px",
@@ -82,7 +86,7 @@ const Details = ({ data }: any) => {
     >
       <div className="container">
         <div className="text-white !z-50 flex gap-10 items-start px-[50px] pt-[70px]">
-          <div className="">
+          <div>
             <Image
               className="rounded-[8px]"
               src={data?.poster}
@@ -140,22 +144,23 @@ const Details = ({ data }: any) => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {data?.people[0]?.employees?.map((item) => (
-              <SwiperSlide key={item?.id}>
-                <div className="flex flex-col items-center">
-                  <Image
-                    className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
-                    src={item?.photo}
-                    width={150}
-                    height={150}
-                    alt="asdas"
-                  />
-                  <p className="truncate text-xs font-bold md:text-sm mt-2">
-                    {item?.full_name}
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
+            {data?.people[0] &&
+              data?.people[0]?.employees?.map((item) => (
+                <SwiperSlide key={item?.id}>
+                  <div className="flex flex-col items-center">
+                    <Image
+                      className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
+                      src={item?.photo}
+                      width={150}
+                      height={150}
+                      alt="asdas"
+                    />
+                    <p className="truncate text-xs font-bold md:text-sm mt-2">
+                      {item?.full_name}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
       </div>
