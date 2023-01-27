@@ -64,14 +64,16 @@ export default function Home({ data, length }: any) {
 }
 
 export const getStaticProps = async () => {
+  let data;
   try {
     const res = await fetch(`${process.env.API_URL}?page=1&items=263`);
-    const data = await res.json();
+    data = await res.json();
 
     return {
       props: { data: data?.data?.movieList },
     };
   } catch (error) {
     console.log(error);
+    data = [];
   }
 };
