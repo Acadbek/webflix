@@ -13,7 +13,9 @@ import { fetchApi } from "@/helpers/fetchApi";
 
 export const getStaticPaths = async () => {
   let data;
-  data = await fetchApi(`${process?.env?.API_URL}?page=$1&items=266`);
+  data = await fetchApi(
+    `${process?.env?.NEXT_PUBLIC_API_URL}?page=$1&items=266`
+  );
   const paths = data?.data?.movieList.map((item: any) => {
     return {
       params: {
@@ -30,7 +32,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   let id: number = context.params.id;
-  const data = await fetchApi(`${process.env.API_URL_SLUG}?id=${id}`);
+  const data = await fetchApi(
+    `${process.env.NEXT_PUBLIC_API_URL_SLUG}?id=${id}`
+  );
 
   return {
     props: {
@@ -141,9 +145,9 @@ const Details = ({ data }: any) => {
             {data?.people[0] &&
               data?.people[0]?.employees?.map((item) => (
                 <SwiperSlide key={item?.id}>
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-center w-[150px]">
                     <Image
-                      className="w-[150px] h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4 sm:h-[150px]"
+                      className="!w-[150px] !h-[150px] rounded-full object-cover shadow-2xl focus:outline-none focus:ring-4"
                       src={item?.photo}
                       width={150}
                       height={150}

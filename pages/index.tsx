@@ -66,7 +66,7 @@ export default function Home({ data, length }: any) {
 
 export const getStaticProps = async () => {
   let data;
-  data = await fetchApi(`${process.env.API_URL}?page=1&items=263`);
+  data = await fetchApi(`${process.env.NEXT_PUBLIC_API_URL}?page=1&items=263`);
 
   return {
     props: {
