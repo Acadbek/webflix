@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 export const getStaticPaths = async () => {
   let data;
   try {
-    data = await axios.get(`${process?.env?.API_URL}?page=$1&items=266`);
+    data = await axios.get(`${process?.env?.API_URL}?page=$1&items=3`);
     const paths = data?.data?.data?.movieList.map((item: any) => {
       return {
         params: {
@@ -23,6 +23,7 @@ export const getStaticPaths = async () => {
       };
     });
 
+    console.log(data.data.data)
     return {
       paths,
       fallback: false,
