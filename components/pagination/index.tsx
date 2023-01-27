@@ -6,7 +6,7 @@ function Pagination({ totalItems = 263, currentPage, pageSize, onPageChange }) {
   }
   return (
     <div>
-      <ul className="inline-flex items-center -space-x-px">
+      <ul className="flex flex-wrap justify-center items-center -space-x-px">
         <li
           className={`${
             currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"

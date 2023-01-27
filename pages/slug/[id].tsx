@@ -76,7 +76,7 @@ const Details = ({ data }: any) => {
       className="absolute -top-4 -z-50 w-full bg-cover bg-left bg-no-repeat"
     >
       <div className="container">
-        <div className="text-white !z-50 flex gap-10 items-start px-[50px] pt-[70px]">
+        <div className="text-white !z-50 md:lg:flex gap-10 items-start px-[50px] pt-[70px]">
           <div>
             <Image
               className="rounded-[8px]"
