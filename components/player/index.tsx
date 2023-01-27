@@ -1,12 +1,12 @@
 import React, { useState, useRef, forwardRef } from "react";
-
-const Player = ({ videoURL }) => {
+const url =
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+const Player = ({ videoURL = url }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const videoRef = useRef(null);
 
-  const url =
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  
 
   const handleProgress = () => {
     const duration = videoRef.current.duration;
