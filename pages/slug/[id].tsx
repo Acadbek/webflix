@@ -28,8 +28,11 @@ export const getStaticPaths = async () => {
       fallback: false,
     };
   } catch (error) {
-    console.log(error);
-    data = [];
+    console.error(error);
+    return {
+      paths: [],
+      fallback: false,
+    };
   }
 };
 
@@ -44,12 +47,16 @@ export const getStaticProps = async (context: any) => {
       },
     };
   } catch (error) {
-    console.log(error);
-    data = [];
+    console.error(error);
+    return {
+      props: {
+        data:[]
+      },
+    };
   }
 };
 
-function secondsToHms(d) {
+function secondsToHms(d:any) {
   d = Number(d);
   var h = Math.floor(d / 3600);
   var m = Math.floor((d % 3600) / 60);
@@ -71,10 +78,14 @@ const Details = ({ data }: any) => {
     paddingTop: "80px",
     opacity: "5",
   };
+
+  const router = useRouter()
+  // console.log("test", Boolean(data.people[0]));
   
-    const router = useRouter()
- 
-  
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
   const open = (e) => {
     setOpenVideoPlayer(true);
     e.stopPropagation();
@@ -83,10 +94,6 @@ const Details = ({ data }: any) => {
     setOpenVideoPlayer(false);
     e.stopPropagation();
   };
-  
-    if (router.isFallback) {
-    return <div>Loading...</div>
-  }
   return (
     <div
       onClick={close}
