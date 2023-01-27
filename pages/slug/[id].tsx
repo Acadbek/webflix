@@ -23,7 +23,6 @@ export const getStaticPaths = async () => {
       };
     });
 
-    console.log('logcha', data.data.data)
     return {
       paths,
       fallback: false,
@@ -42,6 +41,9 @@ export const getStaticProps = async (context: any) => {
   try {
     let id: number = context.params.id;
     data = await axios.get(`${process.env.API_URL_SLUG}?id=${id}`);
+    console.log('env', process.env.API_URL_SLUG)
+    console.log('logcha', data.data.data)
+    
     return {
       props: {
         data: data?.data?.data,
