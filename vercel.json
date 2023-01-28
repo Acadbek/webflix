@@ -1,0 +1,10 @@
+{
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://api.cinerama.uz/api-test/movie-list",
+    "NEXT_PUBLIC_API_URL_SLUG": "https://api.cinerama.uz/api-test/movie-detail"
+  },
+{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] },
+{
+  "framework": "nextjs"
+}
+}
